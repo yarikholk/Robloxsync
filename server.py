@@ -1,5 +1,6 @@
 import http.server
 import json
+import os
 
 spawns = []
 
@@ -33,6 +34,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     return
 
 
-server = http.server.HTTPServer(("localhost", 8000), Handler)
-print("Сервер запущено!")
+port = int(os.environ.get("PORT", 10000))
+server = http.server.HTTPServer(("0.0.0.0", port), Handler)
+print(f"Сервер запущено на порті {port}!")
 server.serve_forever()
